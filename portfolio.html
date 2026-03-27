@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HANIN KT | Professional Video Editor Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-color: #0a0a0b;
+            --surface-color: #161618;
+            --accent-color: #00f2ff; /* Electric Blue */
+            --accent-glow: rgba(0, 242, 255, 0.3);
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- REUSABLE COMPONENTS --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px var(--accent-glow);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-color);
+            color: #000;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 11, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-content {
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(10, 10, 11, 0.582), rgba(10, 10, 11, 0.467)), 
+                        url('https://images.unsplash.com/photo-1774638978183-4adb73276df8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            background: var(--surface-color);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(50%);
+            transition: var(--transition);
+        }
+
+        .about-image:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            background: var(--surface-color);
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* --- PORTFOLIO SECTION --- */
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .section-title .divider {
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 0 auto;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay h3 {
+            color: var(--accent-color);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonials {
+            background-color: var(--surface-color);
+        }
+
+        .testimonial-card {
+            background: var(--bg-color);
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        /* --- CONTACT --- */
+        .contact-content {
+            text-align: center;
+        }
+
+        .contact-email {
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            font-weight: 900;
+            color: var(--text-main);
+            text-decoration: none;
+            margin: 2rem 0;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .contact-email:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-links a {
+            color: var(--text-dim);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .about-grid { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">HANIN<span>kt</span></div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#work">Work</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.7rem;">Hire Me</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <p style="letter-spacing: 4px; color: var(--accent-color);">VIDEOGRAPHER & EDITOR </p>
+                <h1>Bringing Stories<br>To Life</h1>
+                <p>High-impact video editing for commercial brands, cinematic documentaries, and digital creators.</p>
+                <div style="display: flex; gap: 15px; justify-content: center;">
+                    <a href="#work" class="btn btn-primary">View My Reel</a>
+                    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="container section-padding" id="about">
+        <div class="about-grid">
+            <div class="about-image">
+                <!-- Placeholder for Profile Picture -->
+                <img src="https://images.unsplash.com/photo-1774639837888-1e51ef9b3caf?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="John Doe Video Editor">
+            </div>
+            <div class="about-text">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">CRAFTING THE <span style="color: var(--accent-color);">NARRATIVE</span></h2>
+                <p style="color: var(--text-dim); margin-bottom: 1.5rem;">
+                   I like creating videos that people can feel, not just watch. As a videographer and editor, I work on bringing simple ideas to life through visuals and edits. I’m growing my skills step by step and exploring new styles with every project.
+                </p>
+               <!-- <p style="color: var(--text-dim);">
+                    Based in Los Angeles, working globally. Expert in high-end workflows and post-production management.
+                </p>-->
+                
+                <div class="skills-container">
+                    <span class="skill-tag">Adobe Premiere Pro</span>
+                    <span class="skill-tag">After Effects</span>
+                    <span class="skill-tag">DaVinci Resolve</span>
+                    <span class="skill-tag">Color Grading</span>
+                    <span class="skill-tag">Sound Design</span>
+                    <span class="skill-tag">Motion Graphics</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- PORTFOLIO SECTION (YOUTUBE EMBED VERSION) -->
+    <style>
+        /* Specific Styles for the YouTube Grid */
+        .video-card {
+            background: var(--surface-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* The magic for responsive 16:9 videos */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .video-info p {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin: 0;
+        }
+    </style>
+
+    <section class="container section-padding" id="work">
+        <div class="section-title">
+            <h2>Featured Projects</h2>
+            <div class="divider"></div>
+            <p style="margin-top: 15px; color: var(--text-dim);">Click play to watch my latest edits directly below.</p>
+        </div>
+
+        <div class="portfolio-grid">
+            <!-- Project 1: Replace [VIDEO_ID] with the actual ID after "v=" in the YouTube URL -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/vRGhZIdoRis?si=d2uBgUolF9pqwrss" 
+                        title="YouTube video player" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/CCPu6yePb-s?si=4J8Q19IfZZ2qoHI3" 
+                        title="YouTube video player" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/yyTWLWwS_oE?si=plsYE0MXIcX7j4cO" 
+                        title="YouTube video player" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/EdgDhhFhtc8" 
+                        title="YouTube video player" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/5oNn8B-5_p0" 
+                        title="YouTube video player" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/8ye2FBVCjtM?feature=share" 
+                        title="YouTube video player" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="video-info">
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS 
+    <section class="testimonials section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2>Client Feedback</h2>
+                <div class="divider"></div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"John has an incredible eye for pacing. He transformed our raw footage into a masterpiece that exceeded all expectations."</p>
+                    <p class="testimonial-author">— Sarah Jenkins, Creative Director at Nexus Media</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The color grading John provided gave our commercial a high-end cinematic look that truly stood out."</p>
+                    <p class="testimonial-author">— Marcus Thorne, Film Producer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+-->
+    <!-- CONTACT SECTION -->
+    <section class="container section-padding" id="contact">
+        <div class="contact-content">
+            <h2 style="font-size: 1.2rem; letter-spacing: 3px; color: var(--accent-color); text-transform: uppercase;">Ready to start a project?</h2>
+            <a href="https://wa.me/7025631403" class="contact-email">LET'S WORK TOGETHER</a>
+            <div class="social-links">
+                <a href="https://wa.me/7025631403"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.youtube.com/@hanintdg"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.linkedin.com/in/hanin-kt-4605383a5/"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/hanintdg/"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy;hanin kt.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
